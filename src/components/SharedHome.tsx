@@ -127,9 +127,9 @@ export function SharedHome({ user }: SharedHomeProps) {
               <p className="text-sm text-gray-medium">Selection</p>
               <p className="text-4xl font-semibold text-navy-dark">{selections}</p>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 px-2 md:px-4 last:pr-0">
               <p className="text-sm text-gray-medium">Joined</p>
-              <p className="text-3xl font-semibold text-navy-dark">{joined}</p>
+              <p className="text-4xl font-semibold text-navy-dark">{joined}</p>
             </div>
           </div>
 
