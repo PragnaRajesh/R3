@@ -22,6 +22,7 @@ import {
   Calendar
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
+import ClientRecruiterMatrix from './ClientRecruiterMatrix';
 
 interface TeamLeadDashboardProps {
   user: User;
@@ -247,6 +248,9 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
           </Card>
         </div>
       </section>
+
+      {/* Client vs Recruiter Matrix */}
+      <ClientRecruiterMatrix />
 
       {/* Team Members Management */}
       <section>
