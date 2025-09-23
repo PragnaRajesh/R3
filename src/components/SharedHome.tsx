@@ -2,14 +2,19 @@ import React from 'react';
 import { User } from '../App';
 import { Card } from './ui/card';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import { 
+import {
   Users,
   TrendingUp,
   TrendingDown,
   Award,
-  Building
+  Building,
+  ChevronDown
 } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Checkbox } from './ui/checkbox';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
 
 interface SharedHomeProps {
   user: User;
@@ -36,6 +41,22 @@ const topPerformers = [
 const pieChartData = analyticsData.map(item => ({ name: item.name, value: item.count, color: item.color }));
 
 export function SharedHome({ user }: SharedHomeProps) {
+  const recruiters = [
+    'Arun','Sanjai','Sanjay','Sarika','Sreekutty','Suhasini','Swaracha','Shobha','Digambar','Akhil','Afrida'
+  ];
+  const [search, setSearch] = React.useState('');
+  const [selected, setSelected] = React.useState<string[]>([...recruiters]);
+  const allChecked = selected.length === recruiters.length;
+  const toggleAll = () => setSelected(allChecked ? [] : [...recruiters]);
+  const toggleOne = (name: string) =>
+    setSelected(prev => prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]);
+  const filtered = recruiters.filter(r => r.toLowerCase().includes(search.toLowerCase()));
+
+  const targets = 380;
+  const selections = 46;
+  const joined = 12;
+  const yetToAchieve = Math.max(targets - selections - joined, 0);
+
   return (
     <div className="space-y-8">
       {/* Welcome Section */}
@@ -59,6 +80,74 @@ export function SharedHome({ user }: SharedHomeProps) {
                 <p className="text-gray-medium">Dashboard Illustration</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Summary + Recruiter Filter */}
+      <section>
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 flex-1">
+            <Card className="p-4">
+              <p className="text-sm text-gray-medium">Targets</p>
+              <p className="text-2xl font-semibold text-navy-dark">{targets}</p>
+            </Card>
+            <Card className="p-4">
+              <p className="text-sm text-gray-medium">Yet to Achieve</p>
+              <p className="text-2xl font-semibold text-navy-dark">{yetToAchieve}</p>
+            </Card>
+            <Card className="p-4">
+              <p className="text-sm text-gray-medium">Selection</p>
+              <p className="text-2xl font-semibold text-navy-dark">{selections}</p>
+            </Card>
+            <Card className="p-4">
+              <p className="text-sm text-gray-medium">Joined</p>
+              <p className="text-2xl font-semibold text-navy-dark">{joined}</p>
+            </Card>
+          </div>
+          <div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" className="min-w-48 justify-between">
+                  Recruiter
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-medium text-sm">{selected.length}</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </div>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80 p-0">
+                <div className="px-4 py-3 border-b flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Checkbox checked={allChecked} onCheckedChange={toggleAll as any} />
+                    <span className="font-semibold text-navy-dark">Recruiter</span>
+                  </div>
+                  <span className="text-sm text-gray-medium">Record Count</span>
+                </div>
+                <div className="p-3 border-b">
+                  <Input
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                    placeholder="Type to search"
+                  />
+                </div>
+                <div className="max-h-72 overflow-auto p-2">
+                  {filtered.map(name => (
+                    <button
+                      key={name}
+                      onClick={() => toggleOne(name)}
+                      className="w-full flex items-center justify-between px-3 py-2 rounded-md hover:bg-gray-50 text-left"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Checkbox checked={selected.includes(name)} onCheckedChange={() => toggleOne(name)} />
+                        <span className="text-sm text-navy-dark">{name}</span>
+                      </div>
+                      <span className="text-sm text-gray-medium">1</span>
+                    </button>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </section>
