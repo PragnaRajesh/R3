@@ -44,6 +44,20 @@ export function SharedHome({ user }: SharedHomeProps) {
   const recruiters = [
     'Arun','Sanjai','Sanjay','Sarika','Sreekutty','Suhasini','Swaracha','Shobha','Digambar','Akhil','Afrida'
   ];
+  const recruiterStats: Record<string, { targets: number; selections: number; joined: number }> = {
+    Arun: { targets: 34, selections: 4, joined: 1 },
+    Sanjai: { targets: 34, selections: 4, joined: 1 },
+    Sanjay: { targets: 34, selections: 4, joined: 1 },
+    Sarika: { targets: 34, selections: 4, joined: 1 },
+    Sreekutty: { targets: 34, selections: 4, joined: 1 },
+    Suhasini: { targets: 34, selections: 4, joined: 1 },
+    Swaracha: { targets: 34, selections: 4, joined: 1 },
+    Shobha: { targets: 34, selections: 4, joined: 1 },
+    Digambar: { targets: 34, selections: 4, joined: 1 },
+    Akhil: { targets: 34, selections: 4, joined: 0 },
+    Afrida: { targets: 40, selections: 6, joined: 2 },
+  };
+
   const [search, setSearch] = React.useState('');
   const [selected, setSelected] = React.useState<string[]>([...recruiters]);
   const allChecked = selected.length === recruiters.length;
@@ -52,10 +66,22 @@ export function SharedHome({ user }: SharedHomeProps) {
     setSelected(prev => prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]);
   const filtered = recruiters.filter(r => r.toLowerCase().includes(search.toLowerCase()));
 
-  const targets = 380;
-  const selections = 46;
-  const joined = 12;
-  const yetToAchieve = Math.max(targets - selections - joined, 0);
+  const totals = selected.reduce(
+    (acc, name) => {
+      const stat = recruiterStats[name];
+      if (stat) {
+        acc.targets += stat.targets;
+        acc.selections += stat.selections;
+        acc.joined += stat.joined;
+      }
+      return acc;
+    },
+    { targets: 0, selections: 0, joined: 0 },
+  );
+  const targets = totals.targets;
+  const selections = totals.selections;
+  const joined = totals.joined;
+  const yetToAchieve = targets - selections - joined;
 
   return (
     <div className="space-y-8">
@@ -86,34 +112,33 @@ export function SharedHome({ user }: SharedHomeProps) {
 
       {/* Summary + Recruiter Filter */}
       <section>
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 flex-1">
-            <Card className="p-4">
-              <p className="text-sm text-gray-medium">Targets</p>
-              <p className="text-2xl font-semibold text-navy-dark">{targets}</p>
-            </Card>
-            <Card className="p-4">
-              <p className="text-sm text-gray-medium">Yet to Achieve</p>
-              <p className="text-2xl font-semibold text-navy-dark">{yetToAchieve}</p>
-            </Card>
-            <Card className="p-4">
-              <p className="text-sm text-gray-medium">Selection</p>
-              <p className="text-2xl font-semibold text-navy-dark">{selections}</p>
-            </Card>
-            <Card className="p-4">
-              <p className="text-sm text-gray-medium">Joined</p>
-              <p className="text-2xl font-semibold text-navy-dark">{joined}</p>
-            </Card>
-          </div>
-          <div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <Card className="p-4">
+            <p className="text-sm text-gray-medium">Targets</p>
+            <p className="text-2xl font-semibold text-navy-dark">{targets}</p>
+          </Card>
+          <Card className="p-4">
+            <p className="text-sm text-gray-medium">Yet to Achieve</p>
+            <p className="text-2xl font-semibold text-navy-dark">{yetToAchieve}</p>
+          </Card>
+          <Card className="p-4">
+            <p className="text-sm text-gray-medium">Selection</p>
+            <p className="text-2xl font-semibold text-navy-dark">{selections}</p>
+          </Card>
+          <Card className="p-4">
+            <p className="text-sm text-gray-medium">Joined</p>
+            <p className="text-2xl font-semibold text-navy-dark">{joined}</p>
+          </Card>
+          <Card className="p-4">
+            <div className="flex items-center justify-between mb-2">
+              <p className="font-semibold text-navy-dark">Recruiter</p>
+              <span className="text-sm text-gray-medium">{selected.length}/{recruiters.length} selected</span>
+            </div>
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline" className="min-w-48 justify-between">
-                  Recruiter
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-medium text-sm">{selected.length}</span>
-                    <ChevronDown className="w-4 h-4" />
-                  </div>
+                <Button variant="outline" className="w-full justify-between">
+                  Choose recruiters
+                  <ChevronDown className="w-4 h-4" />
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-80 p-0">
@@ -125,11 +150,7 @@ export function SharedHome({ user }: SharedHomeProps) {
                   <span className="text-sm text-gray-medium">Record Count</span>
                 </div>
                 <div className="p-3 border-b">
-                  <Input
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                    placeholder="Type to search"
-                  />
+                  <Input value={search} onChange={e => setSearch(e.target.value)} placeholder="Type to search" />
                 </div>
                 <div className="max-h-72 overflow-auto p-2">
                   {filtered.map(name => (
@@ -151,7 +172,7 @@ export function SharedHome({ user }: SharedHomeProps) {
                 </div>
               </PopoverContent>
             </Popover>
-          </div>
+          </Card>
         </div>
       </section>
 
