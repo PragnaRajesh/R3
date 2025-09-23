@@ -141,7 +141,7 @@ export function SharedHome({ user }: SharedHomeProps) {
             </div>
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline" className="min-w-56 justify-between">
+                <Button variant="outline" className="min-w-56 justify-between bg-white">
                   Choose recruiters
                   <ChevronDown className="w-4 h-4" />
                 </Button>
