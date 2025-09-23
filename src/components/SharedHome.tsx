@@ -115,9 +115,9 @@ export function SharedHome({ user }: SharedHomeProps) {
         <div className="flex items-center gap-8">
           {/* Inline KPIs in one row filling space */}
           <div className="flex flex-1 min-w-0 items-center justify-between gap-8 flex-nowrap">
-            <div className="space-y-1">
+            <div className="space-y-1 px-2 md:px-4 first:pl-0">
               <p className="text-sm text-gray-medium">Targets</p>
-              <p className="text-3xl font-semibold text-navy-dark">{targets}</p>
+              <p className="text-4xl font-semibold text-navy-dark">{targets}</p>
             </div>
             <div className="space-y-1">
               <p className="text-sm text-gray-medium">Yet to Achieve</p>
