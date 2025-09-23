@@ -25,16 +25,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import { 
-  Search, 
-  ChevronLeft, 
-  ChevronRight, 
-  MoreHorizontal, 
+import {
+  Search,
+  ChevronLeft,
+  ChevronRight,
+  MoreHorizontal,
   ArrowUpDown,
   Filter,
-  Download,
-  Mail,
-  Phone
+  Download
 } from 'lucide-react';
 
 interface Candidate {
@@ -338,13 +336,7 @@ export function CandidateTable({ selectedKPI, filters }: CandidateTableProps) {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-2">
-                    <Button variant="ghost" size="sm" className="h-auto p-1">
-                      <Mail className="w-4 h-4" />
-                    </Button>
-                    <Button variant="ghost" size="sm" className="h-auto p-1">
-                      <Phone className="w-4 h-4" />
-                    </Button>
+                  <div className="flex items-center">
                     <span className="text-sm text-gray-600">{candidate.contact}</span>
                   </div>
                 </TableCell>
