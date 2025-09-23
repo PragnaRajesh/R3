@@ -35,7 +35,13 @@ export function SharedDashboard() {
     <div className="space-y-8">
       {/* Recruiter KPIs */}
       <section>
-        <h2 className="text-2xl font-semibold text-navy-dark mb-6">Recruiter KPIs</h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-semibold text-navy-dark">Recruiter KPIs</h2>
+          <Button className="bg-blue-bright hover:bg-blue-600 text-white">
+            <FileText className="w-4 h-4 mr-2" />
+            Generate Report
+          </Button>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {kpiData.map((kpi, index) => (
             <Card
@@ -58,13 +64,6 @@ export function SharedDashboard() {
 
       {/* Performance Metrics */}
       <section>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold text-navy-dark">Performance Metrics</h2>
-          <Button className="bg-blue-bright hover:bg-blue-600 text-white">
-            <FileText className="w-4 h-4 mr-2" />
-            Generate Report
-          </Button>
-        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {performanceCards.map((card, index) => (
             <Card key={index} className="p-4">
@@ -97,10 +96,7 @@ export function SharedDashboard() {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 gap-4">
           <div>
             <h2 className="text-2xl font-semibold text-navy-dark mb-2">Candidate Summary</h2>
-            <p className="text-gray-medium">
-              <span className="font-semibold">1,478</span> candidates selected by{' '}
-              <span className="font-semibold">Sarah Chen, Mike Johnson, Lisa Wong</span> and 12 others
-            </p>
+            <p className="text-gray-medium" />
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2">
