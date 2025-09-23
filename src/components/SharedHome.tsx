@@ -191,38 +191,26 @@ export function SharedHome({ user }: SharedHomeProps) {
                 <h3 className="font-semibold text-navy-dark">{item.name}</h3>
                 <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
               </div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-2xl font-semibold text-navy-dark">{item.count}</span>
-                <div className={`flex items-center text-sm ${item.change > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                  {item.change > 0 ? (
-                    <TrendingUp className="w-4 h-4 mr-1" />
-                  ) : (
-                    <TrendingDown className="w-4 h-4 mr-1" />
-                  )}
-                  {Math.abs(item.change)}%
+              {(item.name === 'Blue Collar' || item.name === 'Lateral') && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-medium">Targets</span>
+                    <span className="font-semibold text-navy-dark">{targets}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-medium">Yet to Achieve</span>
+                    <span className="font-semibold text-navy-dark">{yetToAchieve}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-medium">Selection</span>
+                    <span className="font-semibold text-navy-dark">{selections}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-medium">Joined</span>
+                    <span className="font-semibold text-navy-dark">{joined}</span>
+                  </div>
                 </div>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-                <div className="h-2 rounded-full transition-smooth" style={{ backgroundColor: item.color, width: `${Math.min((item.count / 300) * 100, 100)}%` }} />
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                <div>
-                  <p className="text-xs text-gray-medium">Targets</p>
-                  <p className="text-sm font-semibold text-navy-dark">{targets}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-medium">Yet to Achieve</p>
-                  <p className="text-sm font-semibold text-navy-dark">{yetToAchieve}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-medium">Selection</p>
-                  <p className="text-sm font-semibold text-navy-dark">{selections}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-medium">Joined</p>
-                  <p className="text-sm font-semibold text-navy-dark">{joined}</p>
-                </div>
-              </div>
+              )}
             </Card>
           ))}
         </div>
