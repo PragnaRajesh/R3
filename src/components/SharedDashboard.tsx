@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { Progress } from './ui/progress';
 import { 
   Target,
   TrendingUp,
@@ -39,22 +38,21 @@ export function SharedDashboard() {
         <h2 className="text-2xl font-semibold text-navy-dark mb-6">Recruiter KPIs</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {kpiData.map((kpi, index) => (
-            <Card 
-              key={index} 
-              className={`p-6 cursor-pointer transition-smooth hover:shadow-lg ${selectedKPI === kpi.label ? 'ring-2 ring-blue-bright' : ''}`}
+            <Card
+              key={index}
+              className={`p-4 cursor-pointer transition-smooth hover:shadow-lg ${selectedKPI === kpi.label ? 'ring-2 ring-blue-bright' : ''}`}
               onClick={() => setSelectedKPI(selectedKPI === kpi.label ? null : kpi.label)}
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-navy-dark text-sm">{kpi.label}</h3>
                 <Target className="w-5 h-5 text-gray-medium" />
               </div>
-              <p className="text-2xl font-semibold text-navy-dark mb-2">{kpi.value}</p>
+              <p className="text-xl font-semibold text-navy-dark mb-2">{kpi.value}</p>
               <div className="flex items-center justify-between text-sm text-gray-medium mb-3">
                 <span>of {kpi.total}</span>
                 <span>{Math.round((kpi.value / kpi.total) * 100)}%</span>
               </div>
-              <Progress value={(kpi.value / kpi.total) * 100} className="h-2" />
-            </Card>
+                          </Card>
           ))}
         </div>
       </section>
@@ -70,8 +68,8 @@ export function SharedDashboard() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {performanceCards.map((card, index) => (
-            <Card key={index} className="p-6">
-              <div className="flex items-center justify-between mb-4">
+            <Card key={index} className="p-4">
+              <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-navy-dark text-sm">{card.label}</h3>
                 <div className={`flex items-center text-sm ${card.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
                   {card.trend === 'up' ? (
@@ -82,13 +80,12 @@ export function SharedDashboard() {
                   {Math.abs(card.change)}%
                 </div>
               </div>
-              <div className="mb-4">
-                <span className="text-2xl font-semibold text-navy-dark">{card.value}</span>
+              <div className="mb-3">
+                <span className="text-xl font-semibold text-navy-dark">{card.value}</span>
                 <span className="text-lg text-gray-medium">{card.unit}</span>
               </div>
               <div className="text-sm text-gray-medium mb-2">Target: {card.target}{card.unit}</div>
-              <Progress value={(card.value / card.target) * 100} className="h-2" />
-            </Card>
+                          </Card>
           ))}
         </div>
       </section>
