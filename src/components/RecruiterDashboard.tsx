@@ -9,10 +9,9 @@ import {
   Users, 
   TrendingUp, 
   TrendingDown, 
-  Target, 
-  UserCheck, 
-  Building, 
-  Clock, 
+  UserCheck,
+  Building,
+  Clock,
   Award,
   FileText,
   Filter,
@@ -266,14 +265,13 @@ export function RecruiterDashboard({ user }: RecruiterDashboardProps) {
           {kpiData.map((kpi, index) => (
             <Card
               key={index}
-              className={`p-4 cursor-pointer transition-smooth hover:shadow-lg ${
+              className={`p-4 gap-0.5 cursor-pointer transition-smooth hover:shadow-lg ${
                 selectedKPI === kpi.label ? 'ring-2 ring-blue-bright' : ''
               }`}
               onClick={() => setSelectedKPI(selectedKPI === kpi.label ? null : kpi.label)}
             >
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-navy-dark text-sm">{kpi.label}</h3>
-                <Target className="w-5 h-5 text-gray-medium" />
               </div>
               <p className="text-xl font-semibold text-navy-dark mb-2">{kpi.value}</p>
               <div className="flex items-center justify-between text-sm text-gray-medium mb-3">
