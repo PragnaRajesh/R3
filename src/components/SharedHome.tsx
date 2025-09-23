@@ -112,9 +112,9 @@ export function SharedHome({ user }: SharedHomeProps) {
 
       {/* Summary + Recruiter Filter */}
       <section>
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-          {/* Inline KPIs */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 flex-1">
+        <div className="flex flex-nowrap items-center gap-8 overflow-x-auto">
+          {/* Inline KPIs in one row */}
+          <div className="flex flex-nowrap items-center gap-8 min-w-max">
             <div className="space-y-1">
               <p className="text-sm text-gray-medium">Targets</p>
               <p className="text-3xl font-semibold text-navy-dark">{targets}</p>
@@ -134,7 +134,7 @@ export function SharedHome({ user }: SharedHomeProps) {
           </div>
 
           {/* Recruiter selector (no card) */}
-          <div className="w-full lg:w-auto">
+          <div className="ml-auto">
             <div className="flex items-center gap-3 mb-2">
               <p className="font-semibold text-navy-dark">Recruiter</p>
               <span className="text-sm text-gray-medium">{selected.length}/{recruiters.length} selected</span>
