@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 import { CandidateTable } from './CandidateTable';
+import ClientRecruiterMatrix from './ClientRecruiterMatrix';
 
 interface RecruiterDashboardProps {
   user: User;
@@ -321,6 +322,9 @@ export function RecruiterDashboard({ user }: RecruiterDashboardProps) {
           ))}
         </div>
       </section>
+
+      {/* Client vs Recruiter Matrix */}
+      <ClientRecruiterMatrix />
 
       {/* Pivot Summary & Filters */}
       <section>
