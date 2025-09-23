@@ -133,17 +133,20 @@ export function SharedHome({ user }: SharedHomeProps) {
                 </div>
                 <div className="max-h-72 overflow-auto p-2">
                   {filtered.map(name => (
-                    <button
+                    <div
                       key={name}
+                      role="button"
+                      tabIndex={0}
                       onClick={() => toggleOne(name)}
-                      className="w-full flex items-center justify-between px-3 py-2 rounded-md hover:bg-gray-50 text-left"
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOne(name);} }}
+                      className="w-full flex items-center justify-between px-3 py-2 rounded-md hover:bg-gray-50 text-left cursor-pointer"
                     >
                       <div className="flex items-center gap-3">
                         <Checkbox checked={selected.includes(name)} onCheckedChange={() => toggleOne(name)} />
                         <span className="text-sm text-navy-dark">{name}</span>
                       </div>
                       <span className="text-sm text-gray-medium">1</span>
-                    </button>
+                    </div>
                   ))}
                 </div>
               </PopoverContent>
