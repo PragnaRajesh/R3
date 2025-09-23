@@ -6,20 +6,27 @@ import { Button } from './ui/button';
 import { Progress } from './ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import { 
-  Users, 
-  TrendingUp, 
-  TrendingDown, 
-  Target, 
-  Award, 
-  UserCheck, 
-  Clock, 
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger, DialogClose, DialogDescription } from './ui/dialog';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Textarea } from './ui/textarea';
+import {
+  Users,
+  TrendingUp,
+  TrendingDown,
+  Target,
+  Award,
+  UserCheck,
+  Clock,
   BarChart3,
   FileText,
   AlertTriangle,
   CheckCircle,
   UserX,
-  Calendar
+  Calendar,
+  UserPlus,
+  Building2,
+  Save
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
 import ClientRecruiterMatrix from './ClientRecruiterMatrix';
@@ -66,6 +73,22 @@ const workloadDistribution = [
 export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
   const [selectedTimeframe, setSelectedTimeframe] = useState('monthly');
   const [selectedTeamMember, setSelectedTeamMember] = useState('all');
+
+  const handleCandidateSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    // Replace with API call or state update as needed
+    console.log('New candidate submitted', data);
+  };
+
+  const handleClientSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    // Replace with API call or state update as needed
+    console.log('New client submitted', data);
+  };
 
   return (
     <div className="p-6 space-y-8">
@@ -273,6 +296,137 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                 <SelectItem value="training">In Training</SelectItem>
               </SelectContent>
             </Select>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-blue-bright hover:bg-blue-600 text-white">
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Add Candidate
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle className="text-navy-dark">Add Candidate</DialogTitle>
+                  <DialogDescription>Enter candidate details below.</DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleCandidateSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="candidate-name">Full Name</Label>
+                      <Input id="candidate-name" name="fullName" required />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-email">Email</Label>
+                      <Input id="candidate-email" name="email" type="email" required />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-phone">Phone</Label>
+                      <Input id="candidate-phone" name="phone" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-dept">Department</Label>
+                      <Select name="department">
+                        <SelectTrigger id="candidate-dept">
+                          <SelectValue placeholder="Select department" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="blue-collar">Blue Collar</SelectItem>
+                          <SelectItem value="it">IT</SelectItem>
+                          <SelectItem value="sales">Sales</SelectItem>
+                          <SelectItem value="operations">Operations</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-experience">Experience (years)</Label>
+                      <Input id="candidate-experience" name="experienceYears" type="number" min={0} />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-availability">Availability</Label>
+                      <Input id="candidate-availability" name="availabilityDate" type="date" />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <Label htmlFor="candidate-skills">Skills</Label>
+                      <Textarea id="candidate-skills" name="skills" rows={3} />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <Label htmlFor="candidate-notes">Notes</Label>
+                      <Textarea id="candidate-notes" name="notes" rows={3} />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button type="button" variant="outline">Cancel</Button>
+                    <DialogClose asChild>
+                      <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Candidate
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-blue-bright hover:bg-blue-600 text-white">
+                  <Building2 className="w-4 h-4 mr-2" />
+                  Add Client
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle className="text-navy-dark">Add Client</DialogTitle>
+                  <DialogDescription>Enter client details below.</DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleClientSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="client-name">Company Name</Label>
+                      <Input id="client-name" name="companyName" required />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-industry">Industry</Label>
+                      <Input id="client-industry" name="industry" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-contact">Contact Person</Label>
+                      <Input id="client-contact" name="contactName" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-email">Email</Label>
+                      <Input id="client-email" name="email" type="email" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-phone">Phone</Label>
+                      <Input id="client-phone" name="phone" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-location">Location</Label>
+                      <Input id="client-location" name="location" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-openings">Open Roles</Label>
+                      <Input id="client-openings" name="openings" type="number" min={0} />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <Label htmlFor="client-notes">Notes</Label>
+                      <Textarea id="client-notes" name="notes" rows={3} />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button type="button" variant="outline">Cancel</Button>
+                    <DialogClose asChild>
+                      <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Client
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
+
             <Button className="bg-blue-bright hover:bg-blue-600 text-white">
               <FileText className="w-4 h-4 mr-2" />
               Team Report
