@@ -31,6 +31,7 @@ import {
   BarChart3
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from 'recharts';
+import ClientRecruiterMatrix from './ClientRecruiterMatrix';
 
 interface AdminDashboardProps {
   user: User;
@@ -375,6 +376,9 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
           </Card>
         </div>
       </section>
+
+      {/* Client vs Recruiter Matrix */}
+      <ClientRecruiterMatrix />
 
       {/* Recent Users Table */}
       <section>
