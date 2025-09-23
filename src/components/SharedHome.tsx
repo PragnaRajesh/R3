@@ -202,8 +202,26 @@ export function SharedHome({ user }: SharedHomeProps) {
                   {Math.abs(item.change)}%
                 </div>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
                 <div className="h-2 rounded-full transition-smooth" style={{ backgroundColor: item.color, width: `${Math.min((item.count / 300) * 100, 100)}%` }} />
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                <div>
+                  <p className="text-xs text-gray-medium">Targets</p>
+                  <p className="text-sm font-semibold text-navy-dark">{targets}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-medium">Yet to Achieve</p>
+                  <p className="text-sm font-semibold text-navy-dark">{yetToAchieve}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-medium">Selection</p>
+                  <p className="text-sm font-semibold text-navy-dark">{selections}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-medium">Joined</p>
+                  <p className="text-sm font-semibold text-navy-dark">{joined}</p>
+                </div>
               </div>
             </Card>
           ))}
