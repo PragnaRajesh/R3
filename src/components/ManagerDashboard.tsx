@@ -23,6 +23,7 @@ import {
   Settings
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, ComposedChart, Area, AreaChart } from 'recharts';
+import ClientRecruiterMatrix from './ClientRecruiterMatrix';
 
 interface ManagerDashboardProps {
   user: User;
@@ -331,6 +332,9 @@ export function ManagerDashboard({ user }: ManagerDashboardProps) {
           </Card>
         </div>
       </section>
+
+      {/* Client vs Recruiter Matrix */}
+      <ClientRecruiterMatrix />
 
       {/* Department Details Table */}
       <section>
