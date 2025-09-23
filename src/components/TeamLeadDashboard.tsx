@@ -94,30 +94,6 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
 
   return (
     <div className="p-6 space-y-8">
-      {/* Hero Section */}
-      <section className="bg-gradient-sky rounded-2xl p-8 shadow-soft">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <h1 className="text-3xl font-semibold text-navy-dark mb-2">
-              Welcome back, {user.name}!
-            </h1>
-            <p className="text-lg text-navy-dark mb-6">
-              Team Lead Dashboard
-            </p>
-            <p className="text-gray-medium max-w-lg">
-              Monitor your team's performance, manage resources, and drive recruitment excellence with comprehensive team insights and coaching tools.
-            </p>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-64 h-48 bg-white rounded-xl shadow-soft flex items-center justify-center">
-              <div className="text-center">
-                <Users className="w-16 h-16 text-blue-bright mx-auto mb-4" />
-                <p className="text-gray-medium">Team Leadership</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Team Overview Cards */}
       <section>
