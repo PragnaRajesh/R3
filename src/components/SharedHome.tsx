@@ -111,7 +111,7 @@ export function SharedHome({ user }: SharedHomeProps) {
       </section>
 
       {/* Summary + Recruiter Filter */}
-      <section>
+      <section className="bg-blue-50 rounded-xl p-4 md:p-6 shadow-soft">
         <div className="flex items-center gap-8">
           {/* Inline KPIs in one row filling space */}
           <div className="flex flex-1 min-w-0 items-center justify-between gap-8 flex-nowrap">
