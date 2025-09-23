@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { CandidateTable } from './CandidateTable';
+import ClientRecruiterMatrix from './ClientRecruiterMatrix';
 
 const kpiData = [
   { label: 'Targets Pending', value: 47, total: 100, color: 'bg-red-500' },
@@ -87,6 +88,9 @@ export function SharedDashboard() {
           ))}
         </div>
       </section>
+
+      {/* Client vs Recruiter Matrix */}
+      <ClientRecruiterMatrix />
 
       {/* Candidate Summary */}
       <section>
