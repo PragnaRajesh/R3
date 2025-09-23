@@ -14,10 +14,11 @@ import {
 interface DashboardHeaderProps {
   user: User;
   onLogout: () => void;
+  activeTab: 'home' | 'dashboard';
+  onTabChange: (tab: 'home' | 'dashboard') => void;
 }
 
-export function DashboardHeader({ user, onLogout }: DashboardHeaderProps) {
-  const [activeTab, setActiveTab] = useState<'home' | 'dashboard'>('dashboard');
+export function DashboardHeader({ user, onLogout, activeTab, onTabChange }: DashboardHeaderProps) {
   
   const currentDate = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
@@ -63,7 +64,7 @@ export function DashboardHeader({ user, onLogout }: DashboardHeaderProps) {
           <Button
             variant={activeTab === 'home' ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => setActiveTab('home')}
+            onClick={() => onTabChange('home')}
             className={`${
               activeTab === 'home' 
                 ? 'bg-white shadow-sm text-navy-dark' 
@@ -76,7 +77,7 @@ export function DashboardHeader({ user, onLogout }: DashboardHeaderProps) {
           <Button
             variant={activeTab === 'dashboard' ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => setActiveTab('dashboard')}
+            onClick={() => onTabChange('dashboard')}
             className={`${
               activeTab === 'dashboard' 
                 ? 'bg-white shadow-sm text-navy-dark' 

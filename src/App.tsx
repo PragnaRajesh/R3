@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { LandingPage } from "./components/LandingPage";
 import { LoginForm } from "./components/LoginForm";
 import { DashboardHeader } from "./components/DashboardHeader";
-import { HomePage } from "./components/HomePage";
+import { SharedHome } from "./components/SharedHome";
+import { SharedDashboard } from "./components/SharedDashboard";
 import { RecruiterDashboard } from "./components/RecruiterDashboard";
 import { TeamLeadDashboard } from "./components/TeamLeadDashboard";
 import { ManagerDashboard } from "./components/ManagerDashboard";
@@ -27,6 +28,7 @@ export default function App() {
   const [selectedRole, setSelectedRole] =
     useState<UserRole | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [activeTab, setActiveTab] = useState<'home' | 'dashboard'>('home');
 
   // Handle role selection from landing page
   const handleRoleSelect = (role: UserRole) => {
@@ -94,26 +96,17 @@ export default function App() {
           <DashboardHeader
             user={user}
             onLogout={handleLogout}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
           />
           <main className="pt-16 pb-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              {/* Common Home Page Content */}
-              <HomePage
-                userRole={user.role}
-                userName={user.name}
-              />
-
-              {/* Role-Specific Dashboard KPIs */}
               <div className="mt-12">
-                <div className="mb-6">
-                  <h2 className="text-2xl font-bold text-navy-dark">
-                    Your Dashboard
-                  </h2>
-                  <p className="text-gray-medium">
-                    Role-specific metrics and analytics
-                  </p>
-                </div>
-                {renderDashboard()}
+                {activeTab === 'home' ? (
+                  <SharedHome user={user} />
+                ) : (
+                  <SharedDashboard />
+                )}
               </div>
             </div>
           </main>
