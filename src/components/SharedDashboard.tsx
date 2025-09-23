@@ -62,31 +62,6 @@ export function SharedDashboard() {
         </div>
       </section>
 
-      {/* Performance Metrics */}
-      <section>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {performanceCards.map((card, index) => (
-            <Card key={index} className="p-4">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-navy-dark text-sm">{card.label}</h3>
-                <div className={`flex items-center text-sm ${card.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
-                  {card.trend === 'up' ? (
-                    <TrendingUp className="w-4 h-4 mr-1" />
-                  ) : (
-                    <TrendingDown className="w-4 h-4 mr-1" />
-                  )}
-                  {Math.abs(card.change)}%
-                </div>
-              </div>
-              <div className="mb-3">
-                <span className="text-xl font-semibold text-navy-dark">{card.value}</span>
-                <span className="text-lg text-gray-medium">{card.unit}</span>
-              </div>
-              <div className="text-sm text-gray-medium mb-2">Target: {card.target}{card.unit}</div>
-                          </Card>
-          ))}
-        </div>
-      </section>
 
       {/* Client vs Recruiter Matrix */}
       <ClientRecruiterMatrix />
