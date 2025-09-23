@@ -73,13 +73,15 @@ const workloadDistribution = [
 export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
   const [selectedTimeframe, setSelectedTimeframe] = useState('monthly');
   const [selectedTeamMember, setSelectedTeamMember] = useState('all');
+  const [candidateDepartment, setCandidateDepartment] = useState('');
 
   const handleCandidateSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+    const payload = { ...data, department: candidateDepartment };
     // Replace with API call or state update as needed
-    console.log('New candidate submitted', data);
+    console.log('New candidate submitted', payload);
   };
 
   const handleClientSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -325,7 +327,7 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                     </div>
                     <div>
                       <Label htmlFor="candidate-dept">Department</Label>
-                      <Select name="department">
+                      <Select value={candidateDepartment} onValueChange={setCandidateDepartment}>
                         <SelectTrigger id="candidate-dept">
                           <SelectValue placeholder="Select department" />
                         </SelectTrigger>
@@ -355,7 +357,9 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button type="button" variant="outline">Cancel</Button>
+                    <DialogClose asChild>
+                      <Button type="button" variant="outline">Cancel</Button>
+                    </DialogClose>
                     <DialogClose asChild>
                       <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
                         <Save className="w-4 h-4 mr-2" />
@@ -415,7 +419,9 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button type="button" variant="outline">Cancel</Button>
+                    <DialogClose asChild>
+                      <Button type="button" variant="outline">Cancel</Button>
+                    </DialogClose>
                     <DialogClose asChild>
                       <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
                         <Save className="w-4 h-4 mr-2" />
