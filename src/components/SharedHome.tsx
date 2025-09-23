@@ -112,31 +112,36 @@ export function SharedHome({ user }: SharedHomeProps) {
 
       {/* Summary + Recruiter Filter */}
       <section>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          <Card className="p-4">
-            <p className="text-sm text-gray-medium">Targets</p>
-            <p className="text-2xl font-semibold text-navy-dark">{targets}</p>
-          </Card>
-          <Card className="p-4">
-            <p className="text-sm text-gray-medium">Yet to Achieve</p>
-            <p className="text-2xl font-semibold text-navy-dark">{yetToAchieve}</p>
-          </Card>
-          <Card className="p-4">
-            <p className="text-sm text-gray-medium">Selection</p>
-            <p className="text-2xl font-semibold text-navy-dark">{selections}</p>
-          </Card>
-          <Card className="p-4">
-            <p className="text-sm text-gray-medium">Joined</p>
-            <p className="text-2xl font-semibold text-navy-dark">{joined}</p>
-          </Card>
-          <Card className="p-4">
-            <div className="flex items-center justify-between mb-2">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          {/* Inline KPIs */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 flex-1">
+            <div className="space-y-1">
+              <p className="text-sm text-gray-medium">Targets</p>
+              <p className="text-3xl font-semibold text-navy-dark">{targets}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-sm text-gray-medium">Yet to Achieve</p>
+              <p className="text-3xl font-semibold text-navy-dark">{yetToAchieve}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-sm text-gray-medium">Selection</p>
+              <p className="text-3xl font-semibold text-navy-dark">{selections}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-sm text-gray-medium">Joined</p>
+              <p className="text-3xl font-semibold text-navy-dark">{joined}</p>
+            </div>
+          </div>
+
+          {/* Recruiter selector (no card) */}
+          <div className="w-full lg:w-auto">
+            <div className="flex items-center gap-3 mb-2">
               <p className="font-semibold text-navy-dark">Recruiter</p>
               <span className="text-sm text-gray-medium">{selected.length}/{recruiters.length} selected</span>
             </div>
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline" className="w-full justify-between">
+                <Button variant="outline" className="min-w-56 justify-between">
                   Choose recruiters
                   <ChevronDown className="w-4 h-4" />
                 </Button>
@@ -172,7 +177,7 @@ export function SharedHome({ user }: SharedHomeProps) {
                 </div>
               </PopoverContent>
             </Popover>
-          </Card>
+          </div>
         </div>
       </section>
 
