@@ -357,15 +357,11 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                     </div>
                   </div>
                   <DialogFooter>
-                    <DialogClose asChild>
-                      <Button type="button" variant="outline">Cancel</Button>
-                    </DialogClose>
-                    <DialogClose asChild>
-                      <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
-                        <Save className="w-4 h-4 mr-2" />
-                        Save Candidate
-                      </Button>
-                    </DialogClose>
+                    <Button type="button" variant="outline" onClick={() => setIsCandidateOpen(false)}>Cancel</Button>
+                    <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white" onClick={() => setIsCandidateOpen(false)}>
+                      <Save className="w-4 h-4 mr-2" />
+                      Save Candidate
+                    </Button>
                   </DialogFooter>
                 </form>
               </DialogContent>
@@ -417,15 +413,11 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                     </div>
                   </div>
                   <DialogFooter>
-                    <DialogClose asChild>
-                      <Button type="button" variant="outline">Cancel</Button>
-                    </DialogClose>
-                    <DialogClose asChild>
-                      <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
-                        <Save className="w-4 h-4 mr-2" />
-                        Save Client
-                      </Button>
-                    </DialogClose>
+                    <Button type="button" variant="outline" onClick={() => setIsClientOpen(false)}>Cancel</Button>
+                    <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white" onClick={() => setIsClientOpen(false)}>
+                      <Save className="w-4 h-4 mr-2" />
+                      Save Client
+                    </Button>
                   </DialogFooter>
                 </form>
               </DialogContent>
