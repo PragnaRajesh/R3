@@ -281,41 +281,41 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                   Add Candidate
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="sm:max-w-xl p-4 max-h-[85dvh] overflow-y-auto">
                 <DialogHeader>
                   <DialogTitle className="text-navy-dark">Add Candidate</DialogTitle>
                   <DialogDescription>Enter candidate details below.</DialogDescription>
                 </DialogHeader>
-                <form onSubmit={handleCandidateSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleCandidateSubmit} className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <Label htmlFor="candidate-name">Full Name</Label>
-                      <Input id="candidate-name" name="fullName" required />
+                      <Input id="candidate-name" name="fullName" required className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-email">Email</Label>
-                      <Input id="candidate-email" name="email" type="email" required />
+                      <Input id="candidate-email" name="email" type="email" required className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-contact">Contact Number</Label>
-                      <Input id="candidate-contact" name="contactNumber" />
+                      <Input id="candidate-contact" name="contactNumber" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-position">Position</Label>
-                      <Input id="candidate-position" name="position" />
+                      <Input id="candidate-position" name="position" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-location">Location</Label>
-                      <Input id="candidate-location" name="location" />
+                      <Input id="candidate-location" name="location" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-client">Client</Label>
-                      <Input id="candidate-client" name="client" />
+                      <Input id="candidate-client" name="client" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-status">Status</Label>
                       <Select value={candidateStatus} onValueChange={setCandidateStatus}>
-                        <SelectTrigger id="candidate-status">
+                        <SelectTrigger id="candidate-status" className="h-8">
                           <SelectValue placeholder="Select status" />
                         </SelectTrigger>
                         <SelectContent>
@@ -329,27 +329,27 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                     </div>
                     <div>
                       <Label htmlFor="candidate-doj">Date of Joining</Label>
-                      <Input id="candidate-doj" name="dateOfJoining" type="date" />
+                      <Input id="candidate-doj" name="dateOfJoining" type="date" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-salary">Salary</Label>
-                      <Input id="candidate-salary" name="salary" type="number" min={0} />
+                      <Input id="candidate-salary" name="salary" type="number" min={0} className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-recruiter">Recruiter Reporting</Label>
-                      <Input id="candidate-recruiter" name="recruiterReporting" />
+                      <Input id="candidate-recruiter" name="recruiterReporting" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-lead">Team Lead Reporting</Label>
-                      <Input id="candidate-lead" name="teamLeadReporting" />
+                      <Input id="candidate-lead" name="teamLeadReporting" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-manager">Manager</Label>
-                      <Input id="candidate-manager" name="manager" />
+                      <Input id="candidate-manager" name="manager" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="candidate-arpu">ARPU</Label>
-                      <Input id="candidate-arpu" name="arpu" type="number" min={0} step="0.01" />
+                      <Input id="candidate-arpu" name="arpu" type="number" min={0} step="0.01" className="h-8" />
                     </div>
                     <div className="sm:col-span-2">
                       <Label htmlFor="candidate-additional">Additional Info</Label>
@@ -378,40 +378,40 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                   Add Client
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="sm:max-w-xl p-4 max-h-[85dvh] overflow-y-auto">
                 <DialogHeader>
                   <DialogTitle className="text-navy-dark">Add Client</DialogTitle>
                   <DialogDescription>Enter client details below.</DialogDescription>
                 </DialogHeader>
-                <form onSubmit={handleClientSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleClientSubmit} className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <Label htmlFor="client-name">Company Name</Label>
-                      <Input id="client-name" name="companyName" required />
+                      <Input id="client-name" name="companyName" required className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="client-industry">Industry</Label>
-                      <Input id="client-industry" name="industry" />
+                      <Input id="client-industry" name="industry" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="client-contact">Contact Person</Label>
-                      <Input id="client-contact" name="contactName" />
+                      <Input id="client-contact" name="contactName" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="client-email">Email</Label>
-                      <Input id="client-email" name="email" type="email" />
+                      <Input id="client-email" name="email" type="email" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="client-phone">Phone</Label>
-                      <Input id="client-phone" name="phone" />
+                      <Input id="client-phone" name="phone" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="client-location">Location</Label>
-                      <Input id="client-location" name="location" />
+                      <Input id="client-location" name="location" className="h-8" />
                     </div>
                     <div>
                       <Label htmlFor="client-openings">Open Roles</Label>
-                      <Input id="client-openings" name="openings" type="number" min={0} />
+                      <Input id="client-openings" name="openings" type="number" min={0} className="h-8" />
                     </div>
                     <div className="sm:col-span-2">
                       <Label htmlFor="client-notes">Notes</Label>
