@@ -371,13 +371,11 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
               </DialogContent>
             </Dialog>
 
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button className="bg-blue-bright hover:bg-blue-600 text-white">
-                  <Building2 className="w-4 h-4 mr-2" />
-                  Add Client
-                </Button>
-              </DialogTrigger>
+            <Dialog open={isClientOpen} onOpenChange={setIsClientOpen}>
+              <Button onClick={() => setIsClientOpen(true)} className="bg-blue-bright hover:bg-blue-600 text-white">
+                <Building2 className="w-4 h-4 mr-2" />
+                Add Client
+              </Button>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle className="text-navy-dark">Add Client</DialogTitle>
