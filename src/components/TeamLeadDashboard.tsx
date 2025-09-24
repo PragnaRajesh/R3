@@ -73,14 +73,13 @@ const workloadDistribution = [
 export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
   const [selectedTimeframe, setSelectedTimeframe] = useState('monthly');
   const [selectedTeamMember, setSelectedTeamMember] = useState('all');
-  const [candidateDepartment, setCandidateDepartment] = useState('');
+  const [candidateStatus, setCandidateStatus] = useState('');
 
   const handleCandidateSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
-    const payload = { ...data, department: candidateDepartment };
-    // Replace with API call or state update as needed
+    const payload = { ...data, status: candidateStatus };
     console.log('New candidate submitted', payload);
   };
 
@@ -298,38 +297,63 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                       <Input id="candidate-email" name="email" type="email" required />
                     </div>
                     <div>
-                      <Label htmlFor="candidate-phone">Phone</Label>
-                      <Input id="candidate-phone" name="phone" />
+                      <Label htmlFor="candidate-contact">Contact Number</Label>
+                      <Input id="candidate-contact" name="contactNumber" />
                     </div>
                     <div>
-                      <Label htmlFor="candidate-dept">Department</Label>
-                      <Select value={candidateDepartment} onValueChange={setCandidateDepartment}>
-                        <SelectTrigger id="candidate-dept">
-                          <SelectValue placeholder="Select department" />
+                      <Label htmlFor="candidate-position">Position</Label>
+                      <Input id="candidate-position" name="position" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-location">Location</Label>
+                      <Input id="candidate-location" name="location" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-client">Client</Label>
+                      <Input id="candidate-client" name="client" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-status">Status</Label>
+                      <Select value={candidateStatus} onValueChange={setCandidateStatus}>
+                        <SelectTrigger id="candidate-status">
+                          <SelectValue placeholder="Select status" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="blue-collar">Blue Collar</SelectItem>
-                          <SelectItem value="it">IT</SelectItem>
-                          <SelectItem value="sales">Sales</SelectItem>
-                          <SelectItem value="operations">Operations</SelectItem>
+                          <SelectItem value="prospect">Prospect</SelectItem>
+                          <SelectItem value="interviewing">Interviewing</SelectItem>
+                          <SelectItem value="selected">Selected</SelectItem>
+                          <SelectItem value="joined">Joined</SelectItem>
+                          <SelectItem value="rejected">Rejected</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="candidate-experience">Experience (years)</Label>
-                      <Input id="candidate-experience" name="experienceYears" type="number" min={0} />
+                      <Label htmlFor="candidate-doj">Date of Joining</Label>
+                      <Input id="candidate-doj" name="dateOfJoining" type="date" />
                     </div>
                     <div>
-                      <Label htmlFor="candidate-availability">Availability</Label>
-                      <Input id="candidate-availability" name="availabilityDate" type="date" />
+                      <Label htmlFor="candidate-salary">Salary</Label>
+                      <Input id="candidate-salary" name="salary" type="number" min={0} />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-recruiter">Recruiter Reporting</Label>
+                      <Input id="candidate-recruiter" name="recruiterReporting" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-lead">Team Lead Reporting</Label>
+                      <Input id="candidate-lead" name="teamLeadReporting" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-manager">Manager</Label>
+                      <Input id="candidate-manager" name="manager" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-arpu">ARPU</Label>
+                      <Input id="candidate-arpu" name="arpu" type="number" min={0} step="0.01" />
                     </div>
                     <div className="sm:col-span-2">
-                      <Label htmlFor="candidate-skills">Skills</Label>
-                      <Textarea id="candidate-skills" name="skills" rows={3} />
-                    </div>
-                    <div className="sm:col-span-2">
-                      <Label htmlFor="candidate-notes">Notes</Label>
-                      <Textarea id="candidate-notes" name="notes" rows={3} />
+                      <Label htmlFor="candidate-additional">Additional Info</Label>
+                      <Textarea id="candidate-additional" name="additionalInfo" rows={3} />
                     </div>
                   </div>
                   <DialogFooter>
