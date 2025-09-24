@@ -3,11 +3,7 @@ import { LandingPage } from "./components/LandingPage";
 import { LoginForm } from "./components/LoginForm";
 import { DashboardHeader } from "./components/DashboardHeader";
 import { SharedHome } from "./components/SharedHome";
-import { SharedDashboard } from "./components/SharedDashboard";
-import { RecruiterDashboard } from "./components/RecruiterDashboard";
-import { TeamLeadDashboard } from "./components/TeamLeadDashboard";
-import { ManagerDashboard } from "./components/ManagerDashboard";
-import { AdminDashboard } from "./components/AdminDashboard";
+import { RoleBasedDashboard } from "./components/RoleBasedDashboard";
 
 export type UserRole =
   | "recruiter"
@@ -57,24 +53,7 @@ export default function App() {
 
   const renderDashboard = () => {
     if (!user) return null;
-
-    const dashboardProps = {
-      user,
-      onLogout: handleLogout,
-    };
-
-    switch (user.role) {
-      case "recruiter":
-        return <RecruiterDashboard {...dashboardProps} />;
-      case "teamlead":
-        return <TeamLeadDashboard {...dashboardProps} />;
-      case "manager":
-        return <ManagerDashboard {...dashboardProps} />;
-      case "admin":
-        return <AdminDashboard {...dashboardProps} />;
-      default:
-        return <RecruiterDashboard {...dashboardProps} />;
-    }
+    return <RoleBasedDashboard user={user} onLogout={handleLogout} />;
   };
 
   return (
