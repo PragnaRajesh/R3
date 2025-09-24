@@ -386,36 +386,32 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                 <form onSubmit={handleClientSubmit} className="space-y-3">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <Label htmlFor="client-name">Company Name</Label>
-                      <Input id="client-name" name="companyName" required className="h-8" />
+                      <Label htmlFor="client-name">Client Name</Label>
+                      <Input id="client-name" name="clientName" required className="h-8" />
                     </div>
                     <div>
-                      <Label htmlFor="client-industry">Industry</Label>
-                      <Input id="client-industry" name="industry" className="h-8" />
+                      <Label htmlFor="client-spoc">SPOC</Label>
+                      <Input id="client-spoc" name="spoc" className="h-8" />
                     </div>
                     <div>
-                      <Label htmlFor="client-contact">Contact Person</Label>
-                      <Input id="client-contact" name="contactName" className="h-8" />
+                      <Label htmlFor="client-email">Contact Email</Label>
+                      <Input id="client-email" name="contactEmail" type="email" className="h-8" />
                     </div>
                     <div>
-                      <Label htmlFor="client-email">Email</Label>
-                      <Input id="client-email" name="email" type="email" className="h-8" />
+                      <Label htmlFor="client-arpu">ARPU</Label>
+                      <Input id="client-arpu" name="arpu" type="number" min={0} step="0.01" className="h-8" />
                     </div>
                     <div>
-                      <Label htmlFor="client-phone">Phone</Label>
-                      <Input id="client-phone" name="phone" className="h-8" />
+                      <Label htmlFor="client-position">Position</Label>
+                      <Input id="client-position" name="position" className="h-8" />
                     </div>
                     <div>
-                      <Label htmlFor="client-location">Location</Label>
-                      <Input id="client-location" name="location" className="h-8" />
-                    </div>
-                    <div>
-                      <Label htmlFor="client-openings">Open Roles</Label>
-                      <Input id="client-openings" name="openings" type="number" min={0} className="h-8" />
+                      <Label htmlFor="client-positions">Number of Positions</Label>
+                      <Input id="client-positions" name="numberOfPositions" type="number" min={0} className="h-8" />
                     </div>
                     <div className="sm:col-span-2">
-                      <Label htmlFor="client-notes">Notes</Label>
-                      <Textarea id="client-notes" name="notes" rows={3} />
+                      <Label htmlFor="client-additional">Additional Information</Label>
+                      <Textarea id="client-additional" name="additionalInformation" rows={3} />
                     </div>
                   </div>
                   <DialogFooter>
