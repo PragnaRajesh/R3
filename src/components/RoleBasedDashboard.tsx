@@ -240,70 +240,74 @@ export function RoleBasedDashboard({ user }: RoleBasedDashboardProps) {
         </DialogContent>
       </Dialog>
 
-      {/* Add Closure */}
-      <Dialog open={!!open.addClosure} onOpenChange={(v) => !v && close('addClosure')}>
-        <DialogContent className="sm:max-w-xl p-4 max-h-[85dvh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-navy-dark">Add Closure</DialogTitle>
-            <DialogDescription>Enter closure details below.</DialogDescription>
-          </DialogHeader>
-          <form onSubmit={onSubmit('addClosure')} className="space-y-3">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <Label htmlFor="closure-candidate">Candidate Name</Label>
-                <Input id="closure-candidate" name="candidateName" required className="h-8" />
-              </div>
-              <div>
-                <Label htmlFor="closure-client">Client</Label>
-                <Input id="closure-client" name="client" className="h-8" />
-              </div>
-              <div>
-                <Label htmlFor="closure-position">Position</Label>
-                <Input id="closure-position" name="position" className="h-8" />
-              </div>
-              <div>
-                <Label htmlFor="closure-doj">Date of Joining</Label>
-                <Input id="closure-doj" name="dateOfJoining" type="date" className="h-8" />
-              </div>
-              <div>
-                <Label htmlFor="closure-salary">Salary</Label>
-                <Input id="closure-salary" name="salary" type="number" min={0} className="h-8" />
-              </div>
-              <div>
-                <Label htmlFor="closure-recruiter">Recruiter</Label>
-                <Input id="closure-recruiter" name="recruiter" className="h-8" />
-              </div>
-              <div>
-                <Label htmlFor="closure-lead">Team Lead</Label>
-                <Input id="closure-lead" name="teamLead" className="h-8" />
-              </div>
-              <div>
-                <Label htmlFor="closure-manager">Manager</Label>
-                <Input id="closure-manager" name="manager" className="h-8" />
-              </div>
-              <div>
-                <Label htmlFor="closure-arpu">ARPU</Label>
-                <Input id="closure-arpu" name="arpu" type="number" min={0} step="0.01" className="h-8" />
-              </div>
-              <div className="sm:col-span-2">
-                <Label htmlFor="closure-notes">Notes</Label>
-                <Textarea id="closure-notes" name="notes" rows={3} />
-              </div>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="outline">Cancel</Button>
-              </DialogClose>
-              <DialogClose asChild>
-                <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
-                  <Save className="w-4 h-4 mr-2" />
-                  Save Closure
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+      {user.role === 'admin' && (
+        <>
+          {/* Add Closure */}
+          <Dialog open={!!open.addClosure} onOpenChange={(v) => !v && close('addClosure')}>
+            <DialogContent className="sm:max-w-xl p-4 max-h-[85dvh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="text-navy-dark">Add Closure</DialogTitle>
+                <DialogDescription>Enter closure details below.</DialogDescription>
+              </DialogHeader>
+              <form onSubmit={onSubmit('addClosure')} className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <Label htmlFor="closure-candidate">Candidate Name</Label>
+                    <Input id="closure-candidate" name="candidateName" required className="h-8" />
+                  </div>
+                  <div>
+                    <Label htmlFor="closure-client">Client</Label>
+                    <Input id="closure-client" name="client" className="h-8" />
+                  </div>
+                  <div>
+                    <Label htmlFor="closure-position">Position</Label>
+                    <Input id="closure-position" name="position" className="h-8" />
+                  </div>
+                  <div>
+                    <Label htmlFor="closure-doj">Date of Joining</Label>
+                    <Input id="closure-doj" name="dateOfJoining" type="date" className="h-8" />
+                  </div>
+                  <div>
+                    <Label htmlFor="closure-salary">Salary</Label>
+                    <Input id="closure-salary" name="salary" type="number" min={0} className="h-8" />
+                  </div>
+                  <div>
+                    <Label htmlFor="closure-recruiter">Recruiter</Label>
+                    <Input id="closure-recruiter" name="recruiter" className="h-8" />
+                  </div>
+                  <div>
+                    <Label htmlFor="closure-lead">Team Lead</Label>
+                    <Input id="closure-lead" name="teamLead" className="h-8" />
+                  </div>
+                  <div>
+                    <Label htmlFor="closure-manager">Manager</Label>
+                    <Input id="closure-manager" name="manager" className="h-8" />
+                  </div>
+                  <div>
+                    <Label htmlFor="closure-arpu">ARPU</Label>
+                    <Input id="closure-arpu" name="arpu" type="number" min={0} step="0.01" className="h-8" />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <Label htmlFor="closure-notes">Notes</Label>
+                    <Textarea id="closure-notes" name="notes" rows={3} />
+                  </div>
+                </div>
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button type="button" variant="outline">Cancel</Button>
+                  </DialogClose>
+                  <DialogClose asChild>
+                    <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
+                      <Save className="w-4 h-4 mr-2" />
+                      Save Closure
+                    </Button>
+                  </DialogClose>
+                </DialogFooter>
+              </form>
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
     </div>
   );
 }
