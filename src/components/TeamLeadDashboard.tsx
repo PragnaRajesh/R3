@@ -74,6 +74,8 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
   const [selectedTimeframe, setSelectedTimeframe] = useState('monthly');
   const [selectedTeamMember, setSelectedTeamMember] = useState('all');
   const [candidateStatus, setCandidateStatus] = useState('');
+  const [isCandidateOpen, setIsCandidateOpen] = useState(false);
+  const [isClientOpen, setIsClientOpen] = useState(false);
 
   const handleCandidateSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
