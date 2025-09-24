@@ -2,40 +2,41 @@ import React from 'react';
 import type { UserRole } from '../App';
 import { Button } from './ui/button';
 
-type Action = {
-  key: string;
-  label: string;
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
-  onClick?: () => void;
-};
+export type ActionKey = 'addCandidate' | 'addRecruiter' | 'addClient' | 'addClosure';
 
 interface RoleActionBarProps {
   role: UserRole;
+  onAction: (key: ActionKey) => void;
 }
 
-// Centralized role-to-actions map. Empty by default; will be populated per user request.
-const roleActions: Record<UserRole, Action[]> = {
-  recruiter: [],
-  teamlead: [],
-  manager: [],
-  admin: [],
+const actionLabels: Record<ActionKey, string> = {
+  addCandidate: 'Add Candidate',
+  addRecruiter: 'Add Recruiter',
+  addClient: 'Add Client',
+  addClosure: 'Add Closure',
 };
 
-export function RoleActionBar({ role }: RoleActionBarProps) {
-  const actions = roleActions[role] || [];
-  if (!actions.length) return null;
+const roleActionKeys: Record<UserRole, ActionKey[]> = {
+  recruiter: [],
+  teamlead: ['addCandidate', 'addRecruiter'],
+  manager: ['addCandidate', 'addRecruiter', 'addClient'],
+  admin: ['addCandidate', 'addRecruiter', 'addClient', 'addClosure'],
+};
+
+export function RoleActionBar({ role, onAction }: RoleActionBarProps) {
+  const keys = roleActionKeys[role] || [];
+  if (!keys.length) return null;
 
   return (
     <section className="bg-blue-50 rounded-xl p-4 md:p-6 shadow-soft">
       <div className="flex flex-wrap items-center gap-3">
-        {actions.map((a) => (
+        {keys.map((key) => (
           <Button
-            key={a.key}
-            variant={a.variant ?? 'outline'}
-            onClick={a.onClick}
-            className={a.variant === 'default' ? 'bg-blue-bright hover:bg-blue-600 text-white' : ''}
+            key={key}
+            onClick={() => onAction(key)}
+            className="bg-blue-bright hover:bg-blue-600 text-white"
           >
-            {a.label}
+            {actionLabels[key]}
           </Button>
         ))}
       </div>
