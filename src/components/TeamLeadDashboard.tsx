@@ -74,8 +74,6 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
   const [selectedTimeframe, setSelectedTimeframe] = useState('monthly');
   const [selectedTeamMember, setSelectedTeamMember] = useState('all');
   const [candidateStatus, setCandidateStatus] = useState('');
-  const [isCandidateOpen, setIsCandidateOpen] = useState(false);
-  const [isClientOpen, setIsClientOpen] = useState(false);
 
   const handleCandidateSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -276,11 +274,13 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
               </SelectContent>
             </Select>
 
-            <Dialog open={isCandidateOpen} onOpenChange={setIsCandidateOpen}>
-              <Button onClick={() => setIsCandidateOpen(true)} className="bg-blue-bright hover:bg-blue-600 text-white">
-                <UserPlus className="w-4 h-4 mr-2" />
-                Add Candidate
-              </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-blue-bright hover:bg-blue-600 text-white">
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Add Candidate
+                </Button>
+              </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle className="text-navy-dark">Add Candidate</DialogTitle>
@@ -357,21 +357,27 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button type="button" variant="outline" onClick={() => setIsCandidateOpen(false)}>Cancel</Button>
-                    <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white" onClick={() => setIsCandidateOpen(false)}>
-                      <Save className="w-4 h-4 mr-2" />
-                      Save Candidate
-                    </Button>
+                    <DialogClose asChild>
+                      <Button type="button" variant="outline">Cancel</Button>
+                    </DialogClose>
+                    <DialogClose asChild>
+                      <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Candidate
+                      </Button>
+                    </DialogClose>
                   </DialogFooter>
                 </form>
               </DialogContent>
             </Dialog>
 
-            <Dialog open={isClientOpen} onOpenChange={setIsClientOpen}>
-              <Button onClick={() => setIsClientOpen(true)} className="bg-blue-bright hover:bg-blue-600 text-white">
-                <Building2 className="w-4 h-4 mr-2" />
-                Add Client
-              </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-blue-bright hover:bg-blue-600 text-white">
+                  <Building2 className="w-4 h-4 mr-2" />
+                  Add Client
+                </Button>
+              </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle className="text-navy-dark">Add Client</DialogTitle>
@@ -413,11 +419,15 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button type="button" variant="outline" onClick={() => setIsClientOpen(false)}>Cancel</Button>
-                    <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white" onClick={() => setIsClientOpen(false)}>
-                      <Save className="w-4 h-4 mr-2" />
-                      Save Client
-                    </Button>
+                    <DialogClose asChild>
+                      <Button type="button" variant="outline">Cancel</Button>
+                    </DialogClose>
+                    <DialogClose asChild>
+                      <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Client
+                      </Button>
+                    </DialogClose>
                   </DialogFooter>
                 </form>
               </DialogContent>
