@@ -6,20 +6,27 @@ import { Button } from './ui/button';
 import { Progress } from './ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import { 
-  Users, 
-  TrendingUp, 
-  TrendingDown, 
-  Target, 
-  Award, 
-  UserCheck, 
-  Clock, 
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger, DialogClose, DialogDescription } from './ui/dialog';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Textarea } from './ui/textarea';
+import {
+  Users,
+  TrendingUp,
+  TrendingDown,
+  Target,
+  Award,
+  UserCheck,
+  Clock,
   BarChart3,
   FileText,
   AlertTriangle,
   CheckCircle,
   UserX,
-  Calendar
+  Calendar,
+  UserPlus,
+  Building2,
+  Save
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
 import ClientRecruiterMatrix from './ClientRecruiterMatrix';
@@ -66,33 +73,26 @@ const workloadDistribution = [
 export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
   const [selectedTimeframe, setSelectedTimeframe] = useState('monthly');
   const [selectedTeamMember, setSelectedTeamMember] = useState('all');
+  const [candidateStatus, setCandidateStatus] = useState('');
+
+  const handleCandidateSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    const payload = { ...data, status: candidateStatus };
+    console.log('New candidate submitted', payload);
+  };
+
+  const handleClientSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    // Replace with API call or state update as needed
+    console.log('New client submitted', data);
+  };
 
   return (
     <div className="p-6 space-y-8">
-      {/* Hero Section */}
-      <section className="bg-gradient-sky rounded-2xl p-8 shadow-soft">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <h1 className="text-3xl font-semibold text-navy-dark mb-2">
-              Welcome back, {user.name}!
-            </h1>
-            <p className="text-lg text-navy-dark mb-6">
-              Team Lead Dashboard
-            </p>
-            <p className="text-gray-medium max-w-lg">
-              Monitor your team's performance, manage resources, and drive recruitment excellence with comprehensive team insights and coaching tools.
-            </p>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-64 h-48 bg-white rounded-xl shadow-soft flex items-center justify-center">
-              <div className="text-center">
-                <Users className="w-16 h-16 text-blue-bright mx-auto mb-4" />
-                <p className="text-gray-medium">Team Leadership</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Team Overview Cards */}
       <section>
@@ -273,6 +273,162 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
                 <SelectItem value="training">In Training</SelectItem>
               </SelectContent>
             </Select>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-blue-bright hover:bg-blue-600 text-white">
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Add Candidate
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-xl p-4 max-h-[85dvh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-navy-dark">Add Candidate</DialogTitle>
+                  <DialogDescription>Enter candidate details below.</DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleCandidateSubmit} className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <Label htmlFor="candidate-name">Full Name</Label>
+                      <Input id="candidate-name" name="fullName" required className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-email">Email</Label>
+                      <Input id="candidate-email" name="email" type="email" required className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-contact">Contact Number</Label>
+                      <Input id="candidate-contact" name="contactNumber" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-position">Position</Label>
+                      <Input id="candidate-position" name="position" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-location">Location</Label>
+                      <Input id="candidate-location" name="location" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-client">Client</Label>
+                      <Input id="candidate-client" name="client" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-status">Status</Label>
+                      <Select value={candidateStatus} onValueChange={setCandidateStatus}>
+                        <SelectTrigger id="candidate-status" className="h-8">
+                          <SelectValue placeholder="Select status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="prospect">Prospect</SelectItem>
+                          <SelectItem value="interviewing">Interviewing</SelectItem>
+                          <SelectItem value="selected">Selected</SelectItem>
+                          <SelectItem value="joined">Joined</SelectItem>
+                          <SelectItem value="rejected">Rejected</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-doj">Date of Joining</Label>
+                      <Input id="candidate-doj" name="dateOfJoining" type="date" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-salary">Salary</Label>
+                      <Input id="candidate-salary" name="salary" type="number" min={0} className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-recruiter">Recruiter Reporting</Label>
+                      <Input id="candidate-recruiter" name="recruiterReporting" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-lead">Team Lead Reporting</Label>
+                      <Input id="candidate-lead" name="teamLeadReporting" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-manager">Manager</Label>
+                      <Input id="candidate-manager" name="manager" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="candidate-arpu">ARPU</Label>
+                      <Input id="candidate-arpu" name="arpu" type="number" min={0} step="0.01" className="h-8" />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <Label htmlFor="candidate-additional">Additional Info</Label>
+                      <Textarea id="candidate-additional" name="additionalInfo" rows={3} />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button type="button" variant="outline">Cancel</Button>
+                    </DialogClose>
+                    <DialogClose asChild>
+                      <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Candidate
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-blue-bright hover:bg-blue-600 text-white">
+                  <Building2 className="w-4 h-4 mr-2" />
+                  Add Client
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-xl p-4 max-h-[85dvh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-navy-dark">Add Client</DialogTitle>
+                  <DialogDescription>Enter client details below.</DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleClientSubmit} className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <Label htmlFor="client-name">Client Name</Label>
+                      <Input id="client-name" name="clientName" required className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-spoc">SPOC</Label>
+                      <Input id="client-spoc" name="spoc" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-email">Contact Email</Label>
+                      <Input id="client-email" name="contactEmail" type="email" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-arpu">ARPU</Label>
+                      <Input id="client-arpu" name="arpu" type="number" min={0} step="0.01" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-position">Position</Label>
+                      <Input id="client-position" name="position" className="h-8" />
+                    </div>
+                    <div>
+                      <Label htmlFor="client-positions">Number of Positions</Label>
+                      <Input id="client-positions" name="numberOfPositions" type="number" min={0} className="h-8" />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <Label htmlFor="client-additional">Additional Information</Label>
+                      <Textarea id="client-additional" name="additionalInformation" rows={3} />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button type="button" variant="outline">Cancel</Button>
+                    </DialogClose>
+                    <DialogClose asChild>
+                      <Button type="submit" className="bg-blue-bright hover:bg-blue-600 text-white">
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Client
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
+
             <Button className="bg-blue-bright hover:bg-blue-600 text-white">
               <FileText className="w-4 h-4 mr-2" />
               Team Report

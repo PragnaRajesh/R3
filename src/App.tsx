@@ -105,7 +105,7 @@ export default function App() {
                 {activeTab === 'home' ? (
                   <SharedHome user={user} />
                 ) : (
-                  <SharedDashboard />
+                  renderDashboard()
                 )}
               </div>
             </div>
