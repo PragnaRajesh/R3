@@ -276,13 +276,11 @@ export function TeamLeadDashboard({ user }: TeamLeadDashboardProps) {
               </SelectContent>
             </Select>
 
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button className="bg-blue-bright hover:bg-blue-600 text-white">
-                  <UserPlus className="w-4 h-4 mr-2" />
-                  Add Candidate
-                </Button>
-              </DialogTrigger>
+            <Dialog open={isCandidateOpen} onOpenChange={setIsCandidateOpen}>
+              <Button onClick={() => setIsCandidateOpen(true)} className="bg-blue-bright hover:bg-blue-600 text-white">
+                <UserPlus className="w-4 h-4 mr-2" />
+                Add Candidate
+              </Button>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle className="text-navy-dark">Add Candidate</DialogTitle>
